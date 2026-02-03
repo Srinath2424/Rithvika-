@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Only for Rithvika</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    background:black;
+    color:#eaeaea;
+    font-family: 'Georgia', serif;
+    height:100vh;
+    overflow:hidden;
+}
+
+.center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+    padding:30px;
+}
+
+.hidden{display:none}
+
+h1{
+    color:crimson;
+    font-size:3.5rem;
+    letter-spacing:5px;
+    animation:flicker 2s infinite;
+}
+
+p{
+    font-size:1.35rem;
+    line-height:1.9;
+    max-width:800px;
+    margin:20px auto;
+}
+
+button,input{
+    margin-top:30px;
+    padding:15px 40px;
+    background:transparent;
+    border:2px solid crimson;
+    color:crimson;
+    font-size:1rem;
+    letter-spacing:3px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:crimson;
+    color:black;
+    box-shadow:0 0 30px crimson;
+}
+
+input{
+    text-align:center;
+    outline:none;
+}
+
+@keyframes flicker{
+    0%{opacity:1}
+    50%{opacity:.7}
+    100%{opacity:1}
+}
+
+.heart{
+    position:absolute;
+    bottom:-30px;
+    font-size:24px;
+    color:crimson;
+    animation:float 8s linear infinite;
+    opacity:.6;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);opacity:0}
+    10%{opacity:.6}
+    100%{transform:translateY(-120vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="center" id="lock">
+    <div>
+        <h1>ONLY FOR RITHVIKA</h1>
+        <p>Some things are meant for one soul alone.</p>
+        <input type="password" id="pass" placeholder="Enter my name">
+        <br>
+        <button onclick="unlock()">ENTER</button>
+    </div>
+</div>
+
+<!-- INTRO -->
+<div class="center hidden" id="intro">
+    <div>
+        <h1>DON’T LOOK AWAY</h1>
+        <p>This isn’t a page.<br>This is a confession I can’t undo.</p>
+        <button onclick="start()">TAP TO ENTER</button>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="center hidden" id="main">
+    <div>
+        <h1>RITHVIKA</h1>
+        <p id="type"></p>
+    </div>
+</div>
+
+<audio id="heartbeat" loop>
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-heartbeat-2054.mp3">
+</audio>
+
+<script>
+const text = `
+I don’t love you the way people expect.
+
+I love you in ways that stay silent,
+watchful,
+dangerously patient.
+
+You live in my mind like a beautiful curse—
+something I never want to be free from.
+
+If love is a dark place,
+I’d burn the map
+just to stay lost with you.
+
+I Love You Forever and Ever.
+
+Not softly.
+Not temporarily.
+Not conditionally.
+
+You are not my choice.
+You are my fate.
+`;
+
+let i = 0;
+
+function typeText(){
+    if(i < text.length){
+        document.getElementById("type").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeText, 45);
+    }
+}
+
+function unlock(){
+    if(document.getElementById("pass").value.toLowerCase() === "rithvika"){
+        document.getElementById("lock").classList.add("hidden");
+        document.getElementById("intro").classList.remove("hidden");
+    }else{
+        alert("This heart doesn’t open for strangers.");
+    }
+}
+
+function start(){
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("main").classList.remove("hidden");
+    document.getElementById("heartbeat").play();
+    typeText();
+}
+
+function heart(){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="🖤";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=Math.random()*30+15+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+}
+setInterval(heart,400);
+</script>
+
+</body>
+</html>
